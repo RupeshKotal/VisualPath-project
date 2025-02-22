@@ -1,0 +1,10 @@
+all:
+  hosts:
+     master:
+       ansible_host: 54.158.174.4
+       ansible_user: ubuntu
+       ansible_ssh_private_key: k8
+     slave:
+        ansible_host: 54.87.130.91
+        ansible_user: ubuntu
+        ansible_ssh_private_key: k8
