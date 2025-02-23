@@ -1,0 +1,35 @@
+- hosts: slave
+  become: true
+  tasks:
+  - name: update ubuntu repo
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: install Java
+    apt: 
+      name: openjdk-11-jre
+      state: present
+
+  - name: download maven
+    get_url:
+      url: https://downloads.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+      dest: /tmp/apache-maven-3.8.4-bin.tar.gz
+
+  - name: extract maven
+    unarchive:
+      src: /tmp/apache-maven-3.8.4-bin.tar.gz
+      dest: /opt
+      remote_src: yes
+
+  - name: installl docker
+    apt:
+      name: docker.io
+      state: present
+
+  - name: Start docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+      
